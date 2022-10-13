@@ -1,15 +1,17 @@
 import Ability from '../../interfaces/Ability'
-import Repository from '../../interfaces/Repository'
+import SphereRepository from '../../interfaces/SphereRepository'
 import Talent from '../../interfaces/Talent'
 import Sphere from '../../models/Sphere'
 import TalentGroup from '../../types/TalentGroup'
 
-export default abstract class AbstractRepository implements Repository {
+export default abstract class AbstractRepository implements SphereRepository {
   protected sphere: Sphere
   
   getSphere(): Sphere {
     return this.sphere
   }
+
+  abstract getStartingSphere(options: Record<string, any>): Sphere
 
   getAbility(name: string): Ability {
     return this.sphere.Abilities[name]

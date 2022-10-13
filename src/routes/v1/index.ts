@@ -1,8 +1,10 @@
 import { Router } from 'express'
-import spheres from './spheres'
+import sphere from './sphere'
+import player from './player'
 
 const router = Router()
 
-router.use('/sphere', spheres)
+router.use('/player', player)
+router.use('/sphere', sphere)
 
 export default router
