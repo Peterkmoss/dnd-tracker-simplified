@@ -1,25 +1,40 @@
+import Class from '../models/Class'
 import Player from '../models/Player'
 import Sphere from '../models/Sphere'
+import Stat from '../types/Stat'
 
 export default class PlayerFacade {
-  maxSP: number
-  SP: number
+  hp: number
+  hpMax: number
+
+  spMax: number
+  sp: number
   
   unspentTalentPoints: number
   
-  levels: Record<string, number>
+  levels: {class: Class, levels: number}[]
+
+  stats: Record<Stat, { score: number, modifier: number }>
   
   spheres: Sphere[]
   
   constructor(player: Player) {
-    this.SP = player.spellPoints
-    this.maxSP = player.spellPointsMax
+    this.hp = player.hitPoints
+    this.hpMax = player.hitPointsMax
+
+    this.sp = player.spellPoints
+    this.spMax = player.spellPointsMax
+    
+    this.stats = player.stats
     
     this.unspentTalentPoints = player.magicTalents
     
-    this.levels = {}
+    this.levels = []
     for (const [c, l] of player.levels) {
-      this.levels[c.name] = l
+      this.levels.push({
+        class: c,
+        levels: l,
+      })
     }
     
     this.spheres = player.spheres

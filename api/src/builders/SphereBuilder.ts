@@ -30,12 +30,16 @@ export default class SphereBuilder implements Builder<Sphere> {
     this.sphere.Variants = variants
     return this
   }
-
-  build(): Sphere {
+  
+  private validate(): void {
     if (!this.sphere.Name) { throw new Error('Name not set') }
     if (!this.sphere.Description) { throw new Error('Description not set') }
     if (!this.sphere.Abilities) { throw new Error('No abilities added') }
     if (!this.sphere.Talents) { throw new Error('No talents added') }
+  }
+
+  build(): Sphere {
+    this.validate()
 
     return this.sphere
   }
