@@ -86,7 +86,6 @@ export default class Player {
     this.proficiencies = proficiencies
 
     this.hitDiceCurrent = new Map()
-
     this.totalLevel = 0
     this.classSpellPoints = 0
     this.magicTalents = 0

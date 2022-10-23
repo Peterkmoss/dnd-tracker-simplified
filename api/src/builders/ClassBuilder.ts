@@ -2,6 +2,7 @@ import Builder from '../interfaces/Builder'
 import Feature from '../interfaces/Feature'
 import Class from '../models/Class'
 import Sphere from '../models/Sphere'
+import Stat from '../types/Stat'
 import { Die } from '../util/Dice'
 
 export default class ClassBuilder implements Builder<Class> {
@@ -10,6 +11,7 @@ export default class ClassBuilder implements Builder<Class> {
   validate(): void {
     if (!this.c.name) { throw new Error('Name not set') }
     if (!this.c.hitDie) { throw new Error('Hit die not set') }
+    if (!this.c.savingThrows) { throw new Error('saving throws not set') }
   }
   
   setName(name: string) {
@@ -19,6 +21,11 @@ export default class ClassBuilder implements Builder<Class> {
   
   setStartingSpheres(spheres: Sphere[]) {
     this.c.startingSpheres = spheres
+    return this
+  }
+
+  setSavingThrows(savingThrows: Stat[][]) {
+    this.c.savingThrows = savingThrows
     return this
   }
   

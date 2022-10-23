@@ -1,10 +1,13 @@
 import Feature from '../interfaces/Feature'
+import Stat from '../types/Stat'
 import { Die } from '../util/Dice'
 import Sphere from './Sphere'
 
 export default class Class {
   name: string
   hitDie: Die
+  
+  savingThrows: Stat[][]
 
   features: Record<number, Feature[]> = {}
   

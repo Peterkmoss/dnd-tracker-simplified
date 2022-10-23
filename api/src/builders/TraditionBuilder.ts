@@ -6,6 +6,12 @@ import Stat from '../types/Stat'
 export default class TraditionBuilder implements Builder<Tradition> {
   private tradition = new Tradition()
   
+  constructor() {
+    this.tradition.drawbacks = {}
+    this.tradition.boons = {}
+    this.tradition.spheres = []
+  }
+  
   setName(name: string): TraditionBuilder { 
     this.tradition.name = name
     return this
@@ -33,10 +39,7 @@ export default class TraditionBuilder implements Builder<Tradition> {
   
   validate() {
     if (!this.tradition.name) { throw new Error('Name not set') }
-    if (!this.tradition.drawbacks) { throw new Error('drawbacks not set') }
     if (!this.tradition.keyAbility) { throw new Error('key ability not set') }
-    if (!this.tradition.spheres) { throw new Error('spheres not set') }
-    if (!this.tradition.boons) { throw new Error('boons not set') }
   }
   
   build(): Tradition {
