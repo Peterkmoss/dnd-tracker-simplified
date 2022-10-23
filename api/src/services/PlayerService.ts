@@ -3,10 +3,6 @@ import Player from '../models/Player'
 import repositories from '../repositories'
 
 export default {
-  updateKAM: (KAM: number, player: Player) => {
-    player.updateKAM(KAM)
-  },
-  
   removeSphere: (name: string, player: Player): Player => {
     player.spheres = player.spheres.filter(it => it.Name === name)
     player.magicTalents++
@@ -14,20 +10,21 @@ export default {
   },
     
   useSpellPoints: (amount: number, player: Player): Player => {
-    if (amount > player.spellPoints) {
+    if (amount > player.spellPool.current) {
       throw new Error('player does not have enough SP')
     }
-    player.spellPoints -= amount
+    player.spellPool.current -= amount
     return player
   },
   
   restoreSpellPoints: (amount: number, player: Player): Player => {
-    player.spellPoints = Math.min(amount, player.spellPointsMax)
+    player.spellPool.current = Math.min(amount, player.spellPool.max)
     return player
   },
   
   longRest: (player: Player) => {
-    player.spellPoints = player.spellPointsMax
+    // Todo: hitpoints, hit dice
+    player.spellPool.current = player.spellPool.max
     return player
   },
   

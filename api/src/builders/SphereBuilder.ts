@@ -31,7 +31,7 @@ export default class SphereBuilder implements Builder<Sphere> {
     return this
   }
   
-  private validate(): void {
+  validate(): void {
     if (!this.sphere.Name) { throw new Error('Name not set') }
     if (!this.sphere.Description) { throw new Error('Description not set') }
     if (!this.sphere.Abilities) { throw new Error('No abilities added') }

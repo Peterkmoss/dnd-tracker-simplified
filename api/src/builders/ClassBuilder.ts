@@ -7,7 +7,7 @@ import { Die } from '../util/Dice'
 export default class ClassBuilder implements Builder<Class> {
   private c: Class = new Class(null)
   
-  private validate(): void {
+  validate(): void {
     if (!this.c.name) { throw new Error('Name not set') }
     if (!this.c.hitDie) { throw new Error('Hit die not set') }
   }
@@ -39,20 +39,6 @@ export default class ClassBuilder implements Builder<Class> {
   
   setFeatures(features: Record<number, Feature[]>) {
     this.c.features = features
-    return this
-  }
-  
-  addFeatureToLevel(level: number, feature: Feature) {
-    if (!this.c.features[level]) {
-      this.c.features[level] = [feature]
-      return this
-    }
-    this.c.features[level].push(feature)
-    return this
-  }
-
-  addSpecialization(name: string, map: Record<number, Feature[]>) {
-    this.c.specializations[name] = map
     return this
   }
   
