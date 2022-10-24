@@ -7,9 +7,15 @@ router.get('/test', async (req, res) => {
   res.send(controller.getTestPlayer())
 })
 
-router.get('/save', async (req, res) => {
+router.get('/test/save', async (req, res) => {
   await controller.saveTestPlayer()
-  res.send()
+  res.json({ success: true })
+})
+
+router.post('/save', async (req, res) => {
+  const player = req.body
+  await controller.savePlayer(player)
+  res.json({ success: true })
 })
 
 router.get('/load', async (req, res) => {

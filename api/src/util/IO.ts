@@ -1,9 +1,8 @@
 import * as fsp from 'fs/promises'
 import * as fs from 'fs'
-import Player from '../models/Player'
 import PlayerFacade from '../facades/PlayerFacade'
 
-export const savePlayer = async (identifier: string, player: Player) => {
+export const savePlayer = async (identifier: string, player: any) => {
   if (!fs.existsSync('db')) {
     await fsp.mkdir('db')
   }

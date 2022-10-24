@@ -23,11 +23,15 @@ export default abstract class PlayerFacade {
   }
   
   static deserialize(obj: any): Player {
-    const { tradition, levels, stats, proficiencies } = obj
+    const { id, tradition, levels, stats, proficiencies } = obj
     
     const levelMap: Map<Class, number> = new Map()
     for(const { class: c, l } of levels) {
-      const playerClass = ClassRepository[c.name]()
+      const foundClass = ClassRepository[c.name]
+      if (!foundClass) {
+        throw new Error('class does not exist')
+      }
+      const playerClass = foundClass()
       levelMap.set(playerClass, l)
     }
     
@@ -36,7 +40,7 @@ export default abstract class PlayerFacade {
       return acc
     }, {} as Record<Stat, number>)
 
-    const player = new Player(tradition, levelMap, statRecord, proficiencies)
+    const player = new Player(id, tradition, levelMap, statRecord, proficiencies)
     
     for (const [k, v] of Object.entries(obj)) {
       player[k] = v

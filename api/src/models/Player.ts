@@ -6,8 +6,10 @@ import Movement from '../types/Movement'
 import Item from './Item'
 import Tradition from './Tradition'
 import Currency from '../types/Currency'
+import { randomUUID } from 'crypto'
 
 export default class Player {
+  id: string
   name: string = 'New character'
   alignment: string = ''
   speed: { [key in Movement]?: number } = {}
@@ -71,7 +73,8 @@ export default class Player {
   keyAbilityModifier: number
   stats: Record<Stat, { score: number, modifier: number }>
   
-  constructor(tradition: Tradition, levels: Map<Class, number>, stats: Record<Stat, number>, proficiencies: Proficiencies) {
+  constructor(id: string = randomUUID(), tradition: Tradition, levels: Map<Class, number>, stats: Record<Stat, number>, proficiencies: Proficiencies) {
+    this.id = id
     this.tradition = tradition
     this.levels = levels
     this.stats = Object.entries(stats).reduce((acc, [stat, score]) => {

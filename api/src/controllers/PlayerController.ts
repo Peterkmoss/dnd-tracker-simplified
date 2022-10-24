@@ -3,7 +3,7 @@ import PlayerFacade from '../facades/PlayerFacade'
 import Class from '../models/Class'
 import Player from '../models/Player'
 import ClassRepository from '../repositories/classes/ClassRepository'
-import { loadPlayer, savePlayer } from '../util/Save'
+import * as IO from '../util/IO'
 
 export function getTestPlayer() {
   const levelMap: Map<Class, number> = new Map([
@@ -17,6 +17,7 @@ export function getTestPlayer() {
   .build()
 
   const player = new Player(
+    'test1234test',
     tradition, 
     levelMap, 
     {
@@ -27,15 +28,30 @@ export function getTestPlayer() {
       Strength: 15,
       Wisdom: 4,
     },
-  proficiencies)
+    proficiencies
+  )
+  
+  player.speed.Walk = 30
+
   return PlayerFacade.serialize(player)
 }
 
 export async function saveTestPlayer() {
-  const player: any = getTestPlayer()
-  savePlayer(player.name, player)
+  const player = getTestPlayer()
+  await IO.savePlayer(player.id, player)
+  return true
+}
+
+export async function savePlayer(player: any) {
+  try {
+    await IO.savePlayer(player.id, player)
+    return true
+  } catch (e: any) {
+    console.error(e)
+    return false
+  }
 }
 
 export async function loadTestPlayer() {
-  return await loadPlayer('New character')
+  return await IO.loadPlayer('New character')
 }
