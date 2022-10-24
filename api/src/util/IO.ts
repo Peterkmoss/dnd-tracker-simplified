@@ -18,3 +18,16 @@ export const loadPlayer = async (identifier: string) => {
   const json = JSON.parse(raw)
   return PlayerFacade.deserialize(json)
 }
+
+export const removePlayer = async (identifier: string) => {
+  await fsp.rm(`db/player/${identifier}`)
+}
+
+export const loadPlayers = async () => {
+  const files = await fsp.readdir(`db/player`)
+  const players = []
+  for (const file of files) {
+    players.push(loadPlayer(file))
+  }
+  return players
+}

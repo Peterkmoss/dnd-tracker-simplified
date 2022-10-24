@@ -1,10 +1,11 @@
 import Class from '../models/Class'
 import Player from '../models/Player'
 import ClassRepository from '../repositories/ClassRepository'
+import PlayerDao from '../types/PlayerDao'
 import Stat from '../types/Stat'
 
 export default abstract class PlayerFacade {
-  static serialize(player: Player) {
+  static serialize(player: Player): PlayerDao {
     const levels = []
     for (const [c, l] of player.levels) {
       levels.push({ class: c, levels: l })
