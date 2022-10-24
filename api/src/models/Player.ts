@@ -6,6 +6,7 @@ import Movement from '../types/Movement'
 import Item from './Item'
 import Tradition from './Tradition'
 import Currency from '../types/Currency'
+import { Model } from 'sequelize'
 
 export default class Player {
   name: string = 'New character'

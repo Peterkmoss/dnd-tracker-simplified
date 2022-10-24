@@ -13,7 +13,7 @@ router.get('/save', async (req, res) => {
 })
 
 router.get('/load', async (req, res) => {
-  res.send(await controller.loadTestPlayer())
+  res.json(await controller.loadTestPlayer())
 })
 
 export default router

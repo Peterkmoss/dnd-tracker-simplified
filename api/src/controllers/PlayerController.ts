@@ -5,7 +5,7 @@ import Player from '../models/Player'
 import ClassRepository from '../repositories/classes/ClassRepository'
 import { loadPlayer, savePlayer } from '../util/Save'
 
-export function getTestPlayer(): PlayerFacade {
+export function getTestPlayer() {
   const levelMap: Map<Class, number> = new Map([
     [ClassRepository.Incanter(), 1],
   ])
@@ -28,7 +28,7 @@ export function getTestPlayer(): PlayerFacade {
       Wisdom: 4,
     },
   proficiencies)
-  return new PlayerFacade(player)
+  return PlayerFacade.serialize(player)
 }
 
 export async function saveTestPlayer() {
@@ -37,5 +37,5 @@ export async function saveTestPlayer() {
 }
 
 export async function loadTestPlayer() {
-  loadPlayer('New character')
+  return await loadPlayer('New character')
 }
