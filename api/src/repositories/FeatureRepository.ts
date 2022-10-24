@@ -1,4 +1,4 @@
-import Feature from '../../interfaces/Feature'
+import Feature from '../interfaces/Feature'
 
 export default class FeatureRepository {
   static Elementalist(): Record<number, Feature[]> {

@@ -1,8 +1,8 @@
-import ClassBuilder from '../../builders/ClassBuilder'
-import Feature from '../../interfaces/Feature'
-import Class from '../../models/Class'
-import Dice from '../../util/Dice'
-import AlterationRepository from '../spheres/AlterationRepository'
+import ClassBuilder from '../builders/ClassBuilder'
+import Feature from '../interfaces/Feature'
+import Class from '../models/Class'
+import Dice from '../util/Dice'
+import AlterationRepository from './spheres/AlterationRepository'
 import FeatureRepository from './FeatureRepository'
 
 export default class ClassRepository {

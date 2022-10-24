@@ -2,7 +2,7 @@ import TraditionBuilder from '../builders/TraditionBuilder'
 import PlayerFacade from '../facades/PlayerFacade'
 import Class from '../models/Class'
 import Player from '../models/Player'
-import ClassRepository from '../repositories/classes/ClassRepository'
+import ClassRepository from '../repositories/ClassRepository'
 import * as IO from '../util/IO'
 
 export function getTestPlayer() {
@@ -59,8 +59,4 @@ export async function loadPlayer(id: string) {
     console.error(e)
     return { success: false }
   }
-}
-
-export async function loadTestPlayer() {
-  return await IO.loadPlayer('New character')
 }

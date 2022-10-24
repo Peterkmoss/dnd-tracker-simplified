@@ -1,6 +1,6 @@
 import Class from '../models/Class'
 import Player from '../models/Player'
-import ClassRepository from '../repositories/classes/ClassRepository'
+import ClassRepository from '../repositories/ClassRepository'
 import Stat from '../types/Stat'
 
 export default abstract class PlayerFacade {
