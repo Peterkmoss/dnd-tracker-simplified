@@ -36,12 +36,6 @@ export function getTestPlayer() {
   return PlayerFacade.serialize(player)
 }
 
-export async function saveTestPlayer() {
-  const player = getTestPlayer()
-  await IO.savePlayer(player.id, player)
-  return true
-}
-
 export async function savePlayer(player: any) {
   try {
     await IO.savePlayer(player.id, player)
