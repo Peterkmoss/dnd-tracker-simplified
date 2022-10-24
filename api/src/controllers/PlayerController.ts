@@ -52,6 +52,15 @@ export async function savePlayer(player: any) {
   }
 }
 
+export async function loadPlayer(id: string) {
+  try {
+    return await IO.loadPlayer(id)
+  } catch (e: any) {
+    console.error(e)
+    return { success: false }
+  }
+}
+
 export async function loadTestPlayer() {
   return await IO.loadPlayer('New character')
 }
