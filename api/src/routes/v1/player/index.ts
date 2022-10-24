@@ -11,6 +11,11 @@ router.post('/update/:id', async (req, res) => {
   res.json(result)
 })
 
+router.get('/new', async (req, res) => {
+  const result = await controller.newPlayer()
+  res.json(result)
+})
+
 router.post('/create/:id', async (req, res) => {
   const player = req.body
   const result = await controller.create(player)

@@ -39,6 +39,15 @@ export function getTestPlayer() {
   return PlayerFacade.serialize(player)
 }
 
+export async function newPlayer() {
+  try {
+    return Player.getBasePlayer()
+  } catch (e) {
+    console.error(e)
+    return null
+  }
+}
+
 export async function create(player: any) {
   try {
     return await repo.create(player)

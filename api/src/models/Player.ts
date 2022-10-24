@@ -117,6 +117,18 @@ export default class Player {
     this.spellSave = 8 + this.proficiencyBonus + this.keyAbilityModifier
   }
   
+  static getBasePlayer() {
+    const baseStats: Record<Stat, number> = {
+      Charisma: 10,
+      Intelligence: 10,
+      Constitution: 10,
+      Dexterity: 10,
+      Strength: 10,
+      Wisdom: 10,
+    }
+    return new this(undefined, Tradition.getBaseTradition(), new Map(), baseStats, {})
+  }
+  
   private setPassives() {
     const basePassive = 10
     const wis = this.stats.Wisdom.modifier
