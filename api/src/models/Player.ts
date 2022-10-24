@@ -6,7 +6,6 @@ import Movement from '../types/Movement'
 import Item from './Item'
 import Tradition from './Tradition'
 import Currency from '../types/Currency'
-import { Model } from 'sequelize'
 
 export default class Player {
   name: string = 'New character'
@@ -40,9 +39,11 @@ export default class Player {
   allies: Record<string, string> = {}
   notes: string = ''
   
-  passivePerception: number
-  passiveInsight: number
-  passiveInvestigation: number
+  passives: {
+    perception: number
+    insight: number
+    investigation: number
+  }
   
   hitPoints: {
     current: number
@@ -93,6 +94,7 @@ export default class Player {
       this.spheres.push(...c.startingSpheres)
       this.totalLevel += l
     }
+    this.classSpellPoints = Math.max(this.classSpellPoints, 0)
 
     this.proficiencyBonus = 2
     for (let i = 2; i <= this.totalLevel; i++) {
@@ -100,19 +102,30 @@ export default class Player {
         this.proficiencyBonus++
       }
     }
-    this.classSpellPoints = this.minOfOne(this.classSpellPoints)
       
     this.setKeyAbilityModifier()
     this.setSpellPool()
     this.setHitPoints()
-
-    this.passiveInsight = 10 + this.stats.Wisdom.modifier + (this.proficiencies['Insight'] ? this.proficiencyBonus : 0)
-    this.passiveInvestigation = 10 + this.stats.Intelligence.modifier + (this.proficiencies['Investigation'] ? this.proficiencyBonus : 0)
-    this.passivePerception = 10 + this.stats.Wisdom.modifier + (this.proficiencies['Perception'] ? this.proficiencyBonus : 0)
+    
+    this.setPassives()
     
     this.armorClass = 10 + this.stats.Dexterity.modifier
 
     this.spellSave = 8 + this.proficiencyBonus + this.keyAbilityModifier
+  }
+  
+  private setPassives() {
+    const basePassive = 10
+    const wis = this.stats.Wisdom.modifier
+    const int = this.stats.Intelligence.modifier
+    
+    const proficient = (skill: Skill) => (this.proficiencies[skill] ? this.proficiencyBonus : 0)
+    
+    this.passives = {
+      insight: basePassive + wis + proficient('Insight'),
+      perception: basePassive + wis + proficient('Perception'),
+      investigation: basePassive + int + proficient('Investigation'),
+    }
   }
   
   private setHitPoints() {
