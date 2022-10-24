@@ -3,6 +3,7 @@ import PlayerFacade from '../facades/PlayerFacade'
 import Class from '../models/Class'
 import Player from '../models/Player'
 import ClassRepository from '../repositories/classes/ClassRepository'
+import { loadPlayer, savePlayer } from '../util/Save'
 
 export function getTestPlayer(): PlayerFacade {
   const levelMap: Map<Class, number> = new Map([
@@ -28,4 +29,13 @@ export function getTestPlayer(): PlayerFacade {
     },
   proficiencies)
   return new PlayerFacade(player)
+}
+
+export async function saveTestPlayer() {
+  const player: any = getTestPlayer()
+  savePlayer(player.name, player)
+}
+
+export async function loadTestPlayer() {
+  loadPlayer('New character')
 }

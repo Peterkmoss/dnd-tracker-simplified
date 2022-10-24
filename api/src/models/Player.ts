@@ -5,6 +5,7 @@ import { Die } from '../util/Dice'
 import Movement from '../types/Movement'
 import Item from './Item'
 import Tradition from './Tradition'
+import Currency from '../types/Currency'
 
 export default class Player {
   name: string = 'New character'
@@ -20,20 +21,15 @@ export default class Player {
   
   armorClass: number
   
-  deathSaves?: {
-    success: number
-    fail: number
-  } = undefined
+  deathSaves: {
+    success?: number
+    fail?: number
+  } = {}
   
   proficiencies: Proficiencies
   languages: string[] = []
   
-  currency: {
-    cp?: number
-    sp?: number
-    gp?: number
-    pp?: number
-  } = {}
+  currency: { [key in Currency]?: number } = {}
   
   inventory: Item[] = []
   
