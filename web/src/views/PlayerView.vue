@@ -2,16 +2,20 @@
 import router from '@/router';
 import type Player from '@/types/Player'
 import { onMounted, reactive } from 'vue'
+import API from '@/util/API'
 
 const props = defineProps<{
     id: string
 }>()
 
-let player: Player
+const state = reactive<{
+  player: Partial<Player>
+}>({
+  player: {}
+})
 
 const getPlayer = async () => {
-  const res = await fetch(`http://localhost:3000/v1/player/${props.id}`)
-  const data = await res.json()
+  const data = await API.get(`player/${props.id}`)
   if (!data) {
     await router.replace({ name: 'home' })
     return {}
@@ -20,10 +24,10 @@ const getPlayer = async () => {
 }
 
 onMounted(async () => {
-    player = reactive(await getPlayer())
+  state.player = await getPlayer()
 })
 </script>
 
 <template>
-    Hello {{player?.id}}!
+  {{state.player}}
 </template>

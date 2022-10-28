@@ -7,6 +7,7 @@ import router from '@/router'
 import type Sphere from '@/types/Sphere'
 import type Tradition from '@/types/Tradition'
 import type Class from '@/types/Class'
+import API from '@/util/API'
 
 let state = reactive<{
   players: Player[]
@@ -22,14 +23,33 @@ let state = reactive<{
 })
 
 const getPlayers = async () => {
-  const res = await fetch('http://localhost:3000/v1/player')
-  const data = await res.json()
-  return data
+  return await API.get('player')
+}
+
+const getClasses = async () => {
+  return await API.get('class')
+}
+
+const getTraditions = async () => {
+  return await API.get('tradition')
+}
+
+const getSpheres = async () => {
+  return await API.get('sphere')
 }
 
 onMounted(async () => {
-  const fetched = await getPlayers()
-  state.players.push(...fetched)
+  const players = await getPlayers()
+  state.players.push(...players)
+
+  const classes = await getClasses()
+  state.classes.push(...classes)
+
+  const traditions = await getTraditions()
+  state.traditions.push(...traditions)
+
+  const spheres = await getSpheres()
+  state.spheres.push(...spheres)
 })
 
 </script>
@@ -49,11 +69,21 @@ onMounted(async () => {
     <n-card v-for="tradition in state.traditions" @click="router.push({ name: 'tradition', params: { id: tradition.id } })">
       <p>{{tradition.name}}</p>
     </n-card>
-    <n-button type="primary" @click="router.push({ name: 'new-tradition' })">New tradition</n-button>
+    <n-button type="primary" @click="router.push({ name: 'new-tradition' })">New Tradition</n-button>
 
     <n-card v-for="sphere in state.spheres" @click="router.push({ name: 'sphere', params: { id: sphere.id } })">
       <p>{{sphere.name}}</p>
     </n-card>
-    <n-button type="primary" @click="router.push({ name: 'new-sphere' })">New sphere</n-button>
+    <n-button type="primary" @click="router.push({ name: 'new-sphere' })">New Sphere</n-button>
   </main>
 </template>
+
+<style scoped lang="scss">
+main {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;  
+  max-height: 100vh;
+  max-width: 100vw;
+}
+</style>
