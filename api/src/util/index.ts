@@ -1,5 +1,5 @@
 import * as fs from 'fs'
-import Ability from '../interfaces/Ability'
+import Ability from '../types/Ability'
 import Talent from '../interfaces/Talent'
 
 export function getAbility(sphere: string, name: string): Ability {

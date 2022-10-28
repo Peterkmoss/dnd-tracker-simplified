@@ -1,13 +1,13 @@
 import { Router } from 'express'
-import controller from '../../../controllers/PlayerController'
+import controller from '../../../controllers/ClassController'
 
 const router = Router()
 
 router.post('/update/:id', async (req, res) => {
-  const player = req.body
+  const c = req.body
   const id = req.params.id
 
-  const result = await controller.update(id, player)
+  const result = await controller.update(id, c)
   res.json(result)
 })
 
@@ -17,8 +17,8 @@ router.get('/new', async (req, res) => {
 })
 
 router.post('/create/:id', async (req, res) => {
-  const player = req.body
-  const result = await controller.create(player)
+  const c = req.body
+  const result = await controller.create(c)
   res.json(result)
 })
 

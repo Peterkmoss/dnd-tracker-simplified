@@ -1,13 +1,13 @@
 import { Router } from 'express'
-import controller from '../../../controllers/PlayerController'
+import controller from '../../../controllers/TraditionController'
 
 const router = Router()
 
 router.post('/update/:id', async (req, res) => {
-  const player = req.body
+  const tradition = req.body
   const id = req.params.id
 
-  const result = await controller.update(id, player)
+  const result = await controller.update(id, tradition)
   res.json(result)
 })
 
@@ -17,8 +17,8 @@ router.get('/new', async (req, res) => {
 })
 
 router.post('/create/:id', async (req, res) => {
-  const player = req.body
-  const result = await controller.create(player)
+  const tradition = req.body
+  const result = await controller.create(tradition)
   res.json(result)
 })
 

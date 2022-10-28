@@ -1,33 +1,33 @@
 import { randomUUID } from 'crypto'
-import TraditionDao from '../dao/TraditionDao'
+import SphereDao from '../dao/SphereDao'
 import Converter from '../interfaces/Converter'
 import Repository from '../interfaces/Repository'
-import Tradition from '../models/Tradition'
+import Sphere from '../models/Sphere'
 import ClassType from '../types/ClassType'
 import * as IO from '../util/IO'
 
-export default class TraditionRepository implements Repository<TraditionDao, string> {
-  private converter: Converter<Tradition, TraditionDao> 
-  private type = ClassType.tradition
+export default class SphereRepository implements Repository<SphereDao, string> {
+  private converter: Converter<Sphere, SphereDao> 
+  private type = ClassType.sphere
   
-  constructor(facade: Converter<Tradition, TraditionDao>) {
+  constructor(facade: Converter<Sphere, SphereDao>) {
     this.converter = facade
   }
 
-  async findAll(): Promise<TraditionDao[]> {
+  async findAll(): Promise<SphereDao[]> {
     return await IO.loadMultiple(this.type, this.converter)
   }
 
-  async findById(id: string): Promise<TraditionDao> {
+  async findById(id: string): Promise<SphereDao> {
     return await IO.load(id, this.type, this.converter)
   }
   
-  async findByName(name: string): Promise<TraditionDao> {
+  async findByName(name: string): Promise<SphereDao> {
     const all = await this.findAll()
     return all.find(obj => obj.name === name)
   }
 
-  async create(obj: TraditionDao): Promise<string> {
+  async create(obj: SphereDao): Promise<string> {
     const id = obj.id || randomUUID()
     await IO.save(id, this.type, obj)
     return id
@@ -38,7 +38,7 @@ export default class TraditionRepository implements Repository<TraditionDao, str
     return true
   }
 
-  async update(id: string, obj: TraditionDao): Promise<boolean> {
+  async update(id: string, obj: SphereDao): Promise<boolean> {
     await IO.save(id, this.type, obj)
     return true
   }

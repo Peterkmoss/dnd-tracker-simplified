@@ -1,12 +1,11 @@
 import ClassConverter from '../converter/ClassConverter'
 import DieConverter from '../converter/DieConverter'
-import PlayerConverter from '../converter/PlayerConverter'
-import PlayerRepository from '../repositories/PlayerRepository'
-import PlayerService from '../services/PlayerService'
+import ClassRepository from '../repositories/ClassRepository'
+import ClassService from '../services/ClassService'
 
-const converter = new PlayerConverter(new ClassConverter(new DieConverter()), new DieConverter())
-const repo = new PlayerRepository(converter)
-const service = new PlayerService(repo, converter)
+const converter = new ClassConverter(new DieConverter())
+const repo = new ClassRepository(converter)
+const service = new ClassService(repo, converter)
 
 export default {
   async 'new'() {

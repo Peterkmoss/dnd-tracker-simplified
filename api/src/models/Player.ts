@@ -35,7 +35,7 @@ export default class Player {
   
   inventory: Item[] = []
   
-  tradition: Tradition
+  tradition?: Tradition
   
   backstory: string = ''
   allies: Record<string, string> = {}
@@ -73,9 +73,8 @@ export default class Player {
   keyAbilityModifier: number
   stats: Record<Stat, { score: number, modifier: number }>
   
-  constructor(id: string = randomUUID(), tradition: Tradition, levels: Map<Class, number>, stats: Record<Stat, number>, proficiencies: Proficiencies) {
+  constructor(id: string = randomUUID(), levels: Map<Class, number>, stats: Record<Stat, number>, proficiencies: Proficiencies) {
     this.id = id
-    this.tradition = tradition
     this.levels = levels
     this.stats = Object.entries(stats).reduce((acc, [stat, score]) => {
       acc[stat] = {
@@ -91,8 +90,8 @@ export default class Player {
     this.classSpellPoints = 0
     this.magicTalents = 0
     for (const [c, l] of levels) {
-      this.classSpellPoints += c.spellPointFunction(l)
-      this.magicTalents += c.talentFunction(l)
+      this.classSpellPoints += c.spellPoints[l]
+      this.magicTalents += c.magicTalents[l]
       this.hitDiceCurrent.set(c.hitDie, l)
       this.spheres.push(...c.startingSpheres)
       this.totalLevel += l
@@ -115,18 +114,6 @@ export default class Player {
     this.armorClass = 10 + this.stats.Dexterity.modifier
 
     this.spellSave = 8 + this.proficiencyBonus + this.keyAbilityModifier
-  }
-  
-  static getBasePlayer() {
-    const baseStats: Record<Stat, number> = {
-      Charisma: 10,
-      Intelligence: 10,
-      Constitution: 10,
-      Dexterity: 10,
-      Strength: 10,
-      Wisdom: 10,
-    }
-    return new this(undefined, Tradition.getBaseTradition(), new Map(), baseStats, {})
   }
   
   private setPassives() {
@@ -161,7 +148,11 @@ export default class Player {
   }
   
   private setKeyAbilityModifier() {
-    this.keyAbilityModifier = this.stats[this.tradition.keyAbility].modifier
+    if (this.tradition) {
+      this.keyAbilityModifier = this.stats[this.tradition.keyAbility].modifier
+    } else {
+      this.keyAbilityModifier = 0
+    }
   }
   
   private setSpellPool() {

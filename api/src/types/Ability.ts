@@ -1,6 +1,6 @@
-import Stat from '../types/Stat'
+import Stat from './Stat'
 
-export default interface Ability {
+type Ability = {
   'Casting Time': string
   Range: string
   Duration: string
@@ -10,3 +10,5 @@ export default interface Ability {
   Cost: number | number[]
   Description: string
 }
+
+export default Ability

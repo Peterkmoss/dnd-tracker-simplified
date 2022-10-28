@@ -1,45 +1,28 @@
-import Ability from '../interfaces/Ability'
+import Ability from '../types/Ability'
 import Talent from '../interfaces/Talent'
-import TalentGroup from '../types/TalentGroup'
+import { randomUUID } from 'crypto'
+
+type Talents = Record<string, {
+  intro?: string
+  list: Talent[]
+}>
+
+type Variants = Record<string, string>
 
 export default class Sphere {
-  Name: string
-  Description: string
-  Abilities: Ability[]
-  Talents: Record<string, TalentGroup>
-  Variants?: Record<string, string>
-
-  addTalentGroup(name: string, intro?: string) {
-    if (!this.Talents) {
-      this.Talents = {}
-    }
-    if (!this.Talents[name]) {
-      this.Talents[name] = { intro, list: [] }
-    }
-  }
+  id: string
+  name: string
+  description: string
+  abilities: Ability[]
+  talents: Talents
+  variants?: Variants
   
-  setTalentGroupIntro(name: string, intro: string) {
-    this.Talents[name].intro = intro
-  }
-
-  addTalent(groupName: string, talent: Talent) {
-    if (!this.Talents || !this.Talents[groupName]) {
-      this.addTalentGroup(groupName)
-    }
-    this.Talents[groupName].list.push(talent)
-  }
-  
-  addVariant(name: string, description: string) {
-    if (!this.Variants) {
-      this.Variants = {}
-    }
-    this.Variants[name] = description
-  }
-
-  addAbility(ability: Ability) {
-    if (!this.Abilities) {
-      this.Abilities = []
-    }
-    this.Abilities.push(ability)
+  constructor(id: string = randomUUID(), name: string, description: string, abilities: Ability[], talents: Talents, variants?: Variants) {
+    this.id = id
+    this.name = name
+    this.description = description
+    this.abilities = abilities
+    this.talents = talents
+    this.variants = variants
   }
 }
