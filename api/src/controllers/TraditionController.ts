@@ -5,15 +5,6 @@ import TraditionService from '../services/TraditionService'
 const service = new TraditionService(new TraditionRepository(new TraditionConverter()))
 
 export default {
-  async 'new'() {
-    try {
-      return await service.new()
-    } catch (e) {
-      console.error(e)
-      return null
-    }
-  },
-
   async create(tradition: any) {
     try {
       return await service.create(tradition)

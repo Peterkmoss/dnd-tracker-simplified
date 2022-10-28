@@ -1,6 +1,4 @@
 export default interface Service<T, I> {
-  'new'(...args: any[]): Promise<T>
-
   create(obj: T): Promise<I>
 
   update(id: I, obj: T): Promise<boolean>

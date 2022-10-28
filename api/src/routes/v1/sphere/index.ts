@@ -11,11 +11,6 @@ router.post('/update/:id', async (req, res) => {
   res.json(result)
 })
 
-router.get('/new', async (req, res) => {
-  const result = await controller.new()
-  res.json(result)
-})
-
 router.post('/create/:id', async (req, res) => {
   const sphere = req.body
   const result = await controller.create(sphere)

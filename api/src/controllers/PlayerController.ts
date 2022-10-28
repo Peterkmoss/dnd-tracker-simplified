@@ -11,15 +11,6 @@ const repo = new PlayerRepository(converter)
 const service = new PlayerService(repo, converter)
 
 export default {
-  async 'new'() {
-    try {
-      return await service.new()
-    } catch (e) {
-      console.error(e)
-      return null
-    }
-  },
-
   async create(player: any) {
     try {
       return await service.create(player)

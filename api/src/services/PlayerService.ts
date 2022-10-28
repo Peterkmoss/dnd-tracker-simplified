@@ -14,18 +14,6 @@ export default class PlayerService implements Service<PlayerDao, string> {
     this.converter = converter
   }
 
-  async 'new'() {
-    const baseStats: Record<Stat, number> = {
-      Charisma: 10,
-      Intelligence: 10,
-      Constitution: 10,
-      Dexterity: 10,
-      Strength: 10,
-      Wisdom: 10,
-    }
-    return this.converter.serialize(new Player(undefined, new Map(), baseStats, {}))
-  }
-
   async create(obj: PlayerDao): Promise<string> {
     return await this.repo.create(obj)
   }

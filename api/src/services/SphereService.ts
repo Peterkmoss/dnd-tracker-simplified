@@ -12,10 +12,6 @@ export default class SphereService implements Service<SphereDao, string> {
     this.repo = repo
     this.converter = converter
   }
-  
-  async 'new'(): Promise<SphereDao> {
-    return this.converter.serialize(new Sphere(undefined, 'New Sphere', '', [], {}))
-  }
 
   async create(obj: SphereDao): Promise<string> {
     return await this.repo.create(obj)

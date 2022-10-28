@@ -7,15 +7,6 @@ const repo = new SphereRepository(converter)
 const service = new SphereService(repo, converter)
 
 export default {
-  async 'new'() {
-    try {
-      return await service.new()
-    } catch (e) {
-      console.error(e)
-      return null
-    }
-  },
-
   async create(sphere: any) {
     try {
       return await service.create(sphere)

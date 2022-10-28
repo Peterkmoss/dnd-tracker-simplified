@@ -10,10 +10,6 @@ export default class TraditionService implements Service<TraditionDao, string> {
     this.repo = repo
   }
 
-  async 'new'() {
-    return new Tradition(undefined, 'New Tradition', {}, {}, 'Wisdom', [])
-  }
-
   async create(obj: TraditionDao): Promise<string> {
     return await this.repo.create(obj)
   }

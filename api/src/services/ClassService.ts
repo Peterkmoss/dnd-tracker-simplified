@@ -14,10 +14,6 @@ export default class ClassService implements Service<ClassDao, string> {
     this.converter = converter
   }
 
-  async 'new'() {
-    return this.converter.serialize(new Class(undefined, 'New Class', Dice.d8, [], {}, {}))
-  }
-
   async create(obj: ClassDao): Promise<string> {
     return await this.repo.create(obj)
   }
