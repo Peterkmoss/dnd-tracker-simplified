@@ -3,6 +3,7 @@ import type Class from '@/types/Class'
 import { reactive } from 'vue'
 import { NInput, NInputNumber, NSelect, NButton } from 'naive-ui'
 import type { SelectMixedOption } from 'naive-ui/es/select/src/interface'
+import API from '@/util/API'
 
 const dice: SelectMixedOption[] = [
     { value: 4, label: '4' },
@@ -27,21 +28,13 @@ const state = reactive<{
 })
 
 const updateClassHitDie = (value: number) => {
-    state.class.hitDie = {
-        sides: value
-    }
-    console.log(state.class)
+  state.class.hitDie = {
+    sides: value
+  }
 }
 
 const save = async () => {
-    const result = await fetch('http://localhost:3000/v1/class', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(state.class)
-    })
-    const data = await result.json()
-    console.log(data)
-    return data
+  return API.post('class', state.class)
 }
 
 </script>

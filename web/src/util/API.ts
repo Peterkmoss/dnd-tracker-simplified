@@ -18,7 +18,7 @@ export default {
   },
 
   async post(path: string, body?: any) {
-    return await apiCall(path, 'POST', body)
+    return await apiCall(path, 'POST', JSON.stringify(body))
   },
 
   async 'delete'(path: string) {
