@@ -1,10 +1,12 @@
 import ClassConverter from '../converter/ClassConverter'
 import DieConverter from '../converter/DieConverter'
 import PlayerConverter from '../converter/PlayerConverter'
+import SphereConverter from '../converter/SphereConverter'
 import PlayerRepository from '../repositories/PlayerRepository'
 import PlayerService from '../services/PlayerService'
 
-const converter = new PlayerConverter(new ClassConverter(new DieConverter()), new DieConverter())
+const dieConverter = new DieConverter()
+const converter = new PlayerConverter(new ClassConverter(dieConverter), dieConverter, new SphereConverter())
 const repo = new PlayerRepository(converter)
 const service = new PlayerService(repo, converter)
 
