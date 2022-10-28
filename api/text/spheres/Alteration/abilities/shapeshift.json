@@ -1,9 +1,0 @@
-{
-  "Name": "Shapeshift",
-  "Casting Time": "1 action",
-  "Range": "Touch",
-  "Duration": "Concentration, up to 10 minutes",
-  "Target": "One willing creature",
-  "Cost": 0,
-  "Saving Throw": "Constitution"
-}
