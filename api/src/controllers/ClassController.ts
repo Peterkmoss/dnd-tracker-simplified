@@ -5,7 +5,7 @@ import ClassService from '../services/ClassService'
 
 const converter = new ClassConverter(new DieConverter())
 const repo = new ClassRepository(converter)
-const service = new ClassService(repo, converter)
+const service = new ClassService(repo)
 
 export default {
   async create(player: any) {

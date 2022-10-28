@@ -1,9 +1,9 @@
 enum ClassType {
-  player,
-  item,
-  sphere,
-  tradition,
-  class,
+  player = 'player',
+  item = 'item',
+  sphere = 'sphere',
+  tradition = 'tradition',
+  class = 'class',
 }
 
 export default ClassType

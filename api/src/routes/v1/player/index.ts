@@ -3,7 +3,7 @@ import controller from '../../../controllers/PlayerController'
 
 const router = Router()
 
-router.post('/update/:id', async (req, res) => {
+router.post('/:id', async (req, res) => {
   const player = req.body
   const id = req.params.id
 
@@ -11,7 +11,7 @@ router.post('/update/:id', async (req, res) => {
   res.json(result)
 })
 
-router.post('/create/:id', async (req, res) => {
+router.post('/', async (req, res) => {
   const player = req.body
   const result = await controller.create(player)
   res.json(result)

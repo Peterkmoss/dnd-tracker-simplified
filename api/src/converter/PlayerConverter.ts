@@ -50,7 +50,7 @@ export default class PlayerConverter implements Converter<Player, PlayerDao> {
   }
   
   deserialize(obj: any): Player {
-    const { id, levels, stats, proficiencies, hitDiceCurrent, spheres } = obj
+    const { id, levels, tradition, stats, proficiencies, hitDiceCurrent, spheres } = obj
     
     const levelMap: Map<Class, number> = new Map()
     for(const { class: c, l } of levels) {
@@ -62,7 +62,7 @@ export default class PlayerConverter implements Converter<Player, PlayerDao> {
       return acc
     }, {} as Record<Stat, number>)
 
-    const player = new Player(id, levelMap, statRecord, proficiencies)
+    const player = new Player(id, tradition, levelMap, statRecord, proficiencies)
 
     const hitDiceCurrentMap: Map<Die, number> = new Map()
     for (const { die, current } of hitDiceCurrent) {

@@ -4,9 +4,10 @@ import Tradition from '../models/Tradition'
 
 export default class TraditionConverter implements Converter<Tradition, TraditionDao> {
   serialize(obj: Tradition): Partial<Tradition> {
-    throw new Error('Method not implemented.')
+    return obj
   }
   deserialize(obj: any): Tradition {
-    throw new Error('Method not implemented.')
+    const { id, name, drawbacks, boons, keyAbility, spheres } = obj
+    return new Tradition(id, name, drawbacks, boons, keyAbility, spheres)
   }
 }

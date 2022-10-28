@@ -35,7 +35,7 @@ export default class Player {
   
   inventory: Item[] = []
   
-  tradition?: Tradition
+  tradition: Tradition
   
   backstory: string = ''
   allies: Record<string, string> = {}
@@ -73,8 +73,9 @@ export default class Player {
   keyAbilityModifier: number
   stats: Record<Stat, { score: number, modifier: number }>
   
-  constructor(id: string = randomUUID(), levels: Map<Class, number>, stats: Record<Stat, number>, proficiencies: Proficiencies) {
+  constructor(id: string = randomUUID(), tradition: Tradition, levels: Map<Class, number>, stats: Record<Stat, number>, proficiencies: Proficiencies) {
     this.id = id
+    this.tradition = tradition
     this.levels = levels
     this.stats = Object.entries(stats).reduce((acc, [stat, score]) => {
       acc[stat] = {

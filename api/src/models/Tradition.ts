@@ -8,8 +8,8 @@ type Boons = Record<string, string>
 export default class Tradition {
   id: string
   name: string
-  drawbacks: Record<string, string>
-  boons: Record<string, string>
+  drawbacks: Drawbacks
+  boons: Boons
   keyAbility: Stat
   
   spheres: Sphere[]

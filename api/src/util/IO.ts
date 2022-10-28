@@ -17,14 +17,17 @@ export const save = async (identifier: string, type: ClassType, obj: any) => {
 export const load = async (identifier: string, type: ClassType, converter: Converter<any, any>) => {
   const raw = await fsp.readFile(`db/${type}/${identifier}`, { encoding: 'utf-8', flag: 'r' })
   const json = JSON.parse(raw)
-  return converter.deserialize(json)
+  return converter.deserialize({
+    id: identifier,
+    ...json
+  })
 }
 
 export const loadMultiple = async (type: ClassType, converter: Converter<any, any>) => {
   const files = await fsp.readdir(`db/${type}`)
   const arr = []
   for (const file of files) {
-    arr.push(load(file, type, converter))
+    arr.push(await load(file, type, converter))
   }
   return arr
 }

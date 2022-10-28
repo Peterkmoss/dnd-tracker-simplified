@@ -3,7 +3,7 @@ import controller from '../../../controllers/TraditionController'
 
 const router = Router()
 
-router.post('/update/:id', async (req, res) => {
+router.post('/:id', async (req, res) => {
   const tradition = req.body
   const id = req.params.id
 
@@ -11,7 +11,7 @@ router.post('/update/:id', async (req, res) => {
   res.json(result)
 })
 
-router.post('/create/:id', async (req, res) => {
+router.post('/', async (req, res) => {
   const tradition = req.body
   const result = await controller.create(tradition)
   res.json(result)

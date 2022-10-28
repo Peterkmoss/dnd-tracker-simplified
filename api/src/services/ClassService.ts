@@ -1,17 +1,12 @@
 import ClassDao from '../dao/ClassDao'
-import Converter from '../interfaces/Converter'
 import Repository from '../interfaces/Repository'
 import Service from '../interfaces/Service'
-import Class from '../models/Class'
-import Dice from '../util/Dice'
 
 export default class ClassService implements Service<ClassDao, string> {
   private repo: Repository<ClassDao, string>
-  private converter: Converter<Class, ClassDao>
 
-  constructor(repo: Repository<ClassDao, string>, converter: Converter<Class, ClassDao>) {
+  constructor(repo: Repository<ClassDao, string>) {
     this.repo = repo
-    this.converter = converter
   }
 
   async create(obj: ClassDao): Promise<string> {
