@@ -1,4 +1,4 @@
-import { Die } from '../util/Dice'
+import Die from '../models/Die'
 
 type DieDao = Partial<Die>
 

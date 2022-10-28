@@ -1,12 +1,12 @@
 import Class from './Class'
 import Sphere from './Sphere'
 import Stat from '../types/Stat'
-import { Die } from '../util/Dice'
 import Movement from '../types/Movement'
-import Item from './Item'
 import Tradition from './Tradition'
 import Currency from '../types/Currency'
 import { randomUUID } from 'crypto'
+import Die from './Die'
+import Item from '../types/Item'
 
 export default class Player {
   id: string

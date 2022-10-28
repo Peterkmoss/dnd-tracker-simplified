@@ -4,8 +4,8 @@ import Player from '../models/Player'
 import PlayerDao from '../dao/PlayerDao'
 import Stat from '../types/Stat'
 import ClassDao from '../dao/ClassDao'
-import { Die } from '../util/Dice'
 import DieDao from '../dao/DieDao'
+import Die from '../models/Die'
 
 export default class PlayerConverter implements Converter<Player, PlayerDao> {
   private classConverter: Converter<Class, ClassDao> 

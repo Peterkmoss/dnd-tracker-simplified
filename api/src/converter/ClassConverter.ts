@@ -2,7 +2,7 @@ import ClassDao from '../dao/ClassDao'
 import DieDao from '../dao/DieDao'
 import Converter from '../interfaces/Converter'
 import Class from '../models/Class'
-import { Die } from '../util/Dice'
+import Die from '../models/Die'
 
 export default class ClassConverter implements Converter<Class, ClassDao> {
   private hitDieConverter: Converter<Die, DieDao>

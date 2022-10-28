@@ -1,8 +1,8 @@
 import Stat from '../types/Stat'
-import { Die } from '../util/Dice'
-import Feature from './Feature'
+import Feature from '../types/Feature'
 import Sphere from './Sphere'
 import { randomUUID } from 'crypto'
+import Die from './Die'
 
 type Features = Record<number, Feature[]>
 type Specializations = Record<string, Record<number, Feature[]>>

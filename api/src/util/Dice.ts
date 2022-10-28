@@ -1,14 +1,4 @@
-export class Die {
-  sides: number
-  
-  constructor(sides: number) {
-    this.sides = sides
-  }
-
-  roll(): number {
-     return 1 + Math.floor(Math.random() * this.sides)
-  }
-}
+import Die from '../models/Die'
 
 export default {
   d4: new Die(4),
